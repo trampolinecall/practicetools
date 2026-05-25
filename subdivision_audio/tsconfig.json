@@ -1,0 +1,20 @@
+
+{
+    "extends": "@tsconfig/svelte/tsconfig.json",
+
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+
+        "sourceMap": true,
+
+        "strict": true,
+        "isolatedModules": true,
+
+        "types": ["svelte"]
+    },
+
+    "include": ["src/**/*"],
+    "exclude": ["**/*.spec.ts"]
+}
