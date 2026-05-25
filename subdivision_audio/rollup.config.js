@@ -1,6 +1,6 @@
 import css from 'rollup-plugin-css-only';
 import livereload from 'rollup-plugin-livereload'
-import nodeResolve from '@rollup/plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import serve from 'rollup-plugin-serve';
 import svelte from 'rollup-plugin-svelte';
 import terser from '@rollup/plugin-terser';
@@ -17,7 +17,7 @@ export default {
         sourcemap: true,
         format: 'iife',
         name: 'app',
-        file: 'dist/build/bundle.js'
+        file: 'dist/build/bundle.js',
     },
 
     plugins: [
@@ -27,7 +27,6 @@ export default {
 
         typescript({ sourceMap: true }),
 
-        // we'll extract any component CSS out into a separate file - better for performance
         css({ output: 'bundle.css' }),
 
         !production && serve('dist'),
@@ -35,7 +34,9 @@ export default {
 
         production && terser(),
 
-        nodeResolve(),
+        resolve({
+            browser: true,
+        }),
     ],
 
 };
