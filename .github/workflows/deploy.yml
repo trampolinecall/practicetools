@@ -2,27 +2,24 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: 'main'
+    branches: ['main']
 
 jobs:
   build:
     # TODO: it might be worth it to split these into different jobs so that they can run in parallel
     name: Build things
     runs-on: ubuntu-latest
-    needs: prepare_build
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Make result directory
-        run:
-          mkdir result
+        run: mkdir result
 
-      - name: Install Node.js for subdivision tool
-        working-directory: subdivision
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 26
+          node-version: 20
           cache: npm
 
       - name: Install dependencies for subdivision tool
@@ -36,16 +33,13 @@ jobs:
         run: npm run build
 
       - name: Make result subdirectory for subdivision tool
-        run:
-          mkdir result/subdivision
+        run: mkdir result/subdivision
 
       - name: Copy subdivision tool to result directory
-        run:
-          cp subdivision/build/* result/subdivision/
+        run: cp subdivision/build/* result/subdivision/
 
       - name: Copy main page to result directory
-        run:
-          cp main_page/* result/
+        run: cp main_page/* result/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
