@@ -52,20 +52,20 @@ jobs:
         with:
           path: 'result/'
 
-    deploy:
-      name: Deploy site
-      needs: build
-      runs-on: ubuntu-latest
+  deploy:
+    name: Deploy site
+    needs: build
+    runs-on: ubuntu-latest
 
-      permissions:
-        pages: write
-        id-token: write
+    permissions:
+      pages: write
+      id-token: write
 
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-      steps:
-        name: Deploy
+    steps:
+      - name: Deploy
         id: deploymnet
         uses: actions/deploy-pages@v5
