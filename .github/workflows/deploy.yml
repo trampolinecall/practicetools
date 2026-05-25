@@ -35,10 +35,10 @@ jobs:
         run: mkdir result/subdivision
 
       - name: Copy subdivision tool to result directory
-        run: cp subdivision/build/* result/subdivision/
+        run: cp subdivision/build/* result/subdivision/ -r
 
       - name: Copy main page to result directory
-        run: cp main_page/* result/
+        run: cp main_page/* result/ -r
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
